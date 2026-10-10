@@ -15,3 +15,9 @@ what inference is
 why .env stays out of GitHub
 -> so that api keys are not pushed which can be security risks, anyone with your key can use up your quota.
 
+# ROW 2
+prompt - the text we write on chatbot which gives us answer it has following components
+input, instruction, context, output indicator
+
+zero shot prompting - we dont give any eg to the model we directly write a prompt 
+few shot prompting - we give an eg to the model so that it can overcome the shortcomings of 0 shot and also give better response
