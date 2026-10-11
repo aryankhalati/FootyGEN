@@ -21,3 +21,17 @@ input, instruction, context, output indicator
 
 zero shot prompting - we dont give any eg to the model we directly write a prompt 
 few shot prompting - we give an eg to the model so that it can overcome the shortcomings of 0 shot and also give better response
+
+# ROW 3
+max tokens = the cap on how long one reply can be. If the reply hits it, it gets cut off.
+temperature 0 -> very similar answer
+temperature 2 -> very varied answers
+top -p is an alternative to temperature and it works on probability
+
+prompt writing
+safe silent summary types
+give clear instructions of what u want 
+and always provide the context like summary or analysis or deepdive etc
+
+RAG
+had some randome names of players who dont exist so when we use rag it will only use info from my docs
