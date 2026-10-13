@@ -35,3 +35,15 @@ and always provide the context like summary or analysis or deepdive etc
 
 RAG
 had some randome names of players who dont exist so when we use rag it will only use info from my docs
+
+# ROW 4
+RAG - it is basically when we ask model for an output but it does not have information about that initially so then we feed it a knowledge source after which it retrieves information out of it and then give us final output eg if i ask analyse blood report model will say but which one id have any then i will give my blood report which it will analyse and then give the output 
+similar search -> most similar features in based on meanings not just words
+vector embeddings - numbers that represent meaning of text/data or unstructured data
+we need embedding models to convert thing into vector embeddings
+also it forms clusters of objects which are similar eg (knife, stove, spoon), (door, window, table) etc
+vector db -> used to store vector embeddings
+we use vector index (a data structure) to seacrh vector embedding in vector db
+
+process eg - company policy documents -> divided into chunks -> embedding model generates vectors-> vector db
+done with watching part
