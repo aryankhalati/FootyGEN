@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { answerQuestion } from "./rag.js";
 
 dotenv.config();
 
@@ -11,6 +12,25 @@ app.use(express.json());
 // Health check: tells us the server is alive
 app.get("/health", (req, res) => {
   res.json({ status: "ok", app: "FootyGEN" });
+});
+
+app.post("/ask", async (req, res) => {
+  const question = typeof req.body?.question === "string" ? req.body.question.trim() : "";
+
+  if (!question) {
+    return res.status(400).json({ error: "Send a JSON body like { \"question\": \"...\" }" });
+  }
+  if (question.length > 500) {
+    return res.status(400).json({ error: "Question is too long (500 characters max)." });
+  }
+
+  try {
+    const result = await answerQuestion(question);
+    res.json(result);
+  } catch (err) {
+    console.error("Ask failed:", err);
+    res.status(500).json({ error: "Something went wrong answering that. Please try again." });
+  }
 });
 
 const PORT = process.env.PORT || 5000;
