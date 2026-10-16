@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { answerQuestion } from "./rag.js";
+import { CATEGORIES } from "./retriever.js";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.get("/health", (req, res) => {
 
 app.post("/ask", async (req, res) => {
   const question = typeof req.body?.question === "string" ? req.body.question.trim() : "";
+  const category = req.body?.category || undefined;
 
   if (!question) {
     return res.status(400).json({ error: "Send a JSON body like { \"question\": \"...\" }" });
@@ -23,9 +25,12 @@ app.post("/ask", async (req, res) => {
   if (question.length > 500) {
     return res.status(400).json({ error: "Question is too long (500 characters max)." });
   }
+  if (category && !CATEGORIES.includes(category)) {
+    return res.status(400).json({ error: `category must be one of: ${CATEGORIES.join(", ")}` });
+  }
 
   try {
-    const result = await answerQuestion(question);
+    const result = await answerQuestion(question, category);
     res.json(result);
   } catch (err) {
     console.error("Ask failed:", err);

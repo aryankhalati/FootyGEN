@@ -54,8 +54,8 @@ function splitAnswer(raw, matches) {
   return { text, picked };
 }
 
-export async function answerQuestion(question) {
-  const { matches, topScore, inScope } = await retrieve(question);
+export async function answerQuestion(question, category) {
+  const { matches, topScore, inScope } = await retrieve(question, category);
 
   // Gate 1: the cheap score floor, no model call
   if (!inScope) {
