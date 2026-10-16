@@ -1,0 +1,107 @@
+{
+  "GK": {
+    "name": "Goalkeeper",
+    "description": "The last line of defence. Stops shots, commands the penalty area and starts attacks with accurate distribution.",
+    "question": "What does a goalkeeper do?"
+  },
+  "LB": {
+    "name": "Left Back",
+    "description": "Defends the left flank and overlaps the winger or midfielder to add width and deliver crosses in attack.",
+    "question": "What does a full-back do?"
+  },
+  "RB": {
+    "name": "Right Back",
+    "description": "Defends the right flank and overlaps the winger or midfielder to add width and deliver crosses in attack.",
+    "question": "What does a full-back do?"
+  },
+  "LCB": {
+    "name": "Left Centre-Back",
+    "description": "Defends the middle of the pitch, wins aerial duels, covers teammates and helps start build-up from the back.",
+    "question": "What does a centre-back do?"
+  },
+  "RCB": {
+    "name": "Right Centre-Back",
+    "description": "Defends the middle of the pitch, wins aerial duels, covers teammates and helps start build-up from the back.",
+    "question": "What does a centre-back do?"
+  },
+  "CB": {
+    "name": "Centre-Back",
+    "description": "The middle of a back three. Organises the defensive line and covers the centre-backs on either side.",
+    "question": "What does a centre-back do?"
+  },
+  "LWB": {
+    "name": "Left Wing-Back",
+    "description": "Covers the whole left flank. More attacking than a full-back, and provides the team's width on that side.",
+    "question": "What does a wing-back do?"
+  },
+  "RWB": {
+    "name": "Right Wing-Back",
+    "description": "Covers the whole right flank. More attacking than a full-back, and provides the team's width on that side.",
+    "question": "What does a wing-back do?"
+  },
+  "DM": {
+    "name": "Defensive Midfielder",
+    "description": "Sits in front of the defence, breaks up opposition attacks and recycles possession. Often called the No. 6.",
+    "question": "What does a No. 6 do?"
+  },
+  "LDM": {
+    "name": "Left Defensive Midfielder",
+    "description": "One of two holding midfielders. Shields the back line, wins the ball and keeps possession moving.",
+    "question": "What does a No. 6 do?"
+  },
+  "RDM": {
+    "name": "Right Defensive Midfielder",
+    "description": "One of two holding midfielders. Shields the back line, wins the ball and keeps possession moving.",
+    "question": "What does a No. 6 do?"
+  },
+  "LCM": {
+    "name": "Left Central Midfielder",
+    "description": "Links defence and attack, covers a lot of ground and arrives late into the box. Often called a No. 8.",
+    "question": "What does a No. 8 do?"
+  },
+  "RCM": {
+    "name": "Right Central Midfielder",
+    "description": "Links defence and attack, covers a lot of ground and arrives late into the box. Often called a No. 8.",
+    "question": "What does a No. 8 do?"
+  },
+  "LM": {
+    "name": "Left Midfielder",
+    "description": "Provides width on the left in a flat midfield, supports the full-back and tracks back when defending.",
+    "question": "What does a winger do?"
+  },
+  "RM": {
+    "name": "Right Midfielder",
+    "description": "Provides width on the right in a flat midfield, supports the full-back and tracks back when defending.",
+    "question": "What does a winger do?"
+  },
+  "CAM": {
+    "name": "Attacking Midfielder",
+    "description": "Plays between the opposition's midfield and defence, creating chances with the final pass. Often called the No. 10.",
+    "question": "What does a No. 10 do?"
+  },
+  "LW": {
+    "name": "Left Winger",
+    "description": "Stretches the defence, takes on defenders and either crosses from the byline or cuts inside to shoot.",
+    "question": "What does a winger do?"
+  },
+  "RW": {
+    "name": "Right Winger",
+    "description": "Stretches the defence, takes on defenders and either crosses from the byline or cuts inside to shoot.",
+    "question": "What does a winger do?"
+  },
+  "ST": {
+    "name": "Striker",
+    "description": "Leads the line, finishes chances and often starts the press from the front.",
+    "question": "What is the difference between a target man and a poacher?"
+  },
+  "LST": {
+    "name": "Left Striker",
+    "description": "Half of a strike pair. Works with the other striker to score, hold the ball up and press the centre-backs.",
+    "question": "What is the difference between a target man and a poacher?"
+  },
+  "RST": {
+    "name": "Right Striker",
+    "description": "Half of a strike pair. Works with the other striker to score, hold the ball up and press the centre-backs.",
+    "question": "What is the difference between a target man and a poacher?"
+  }
+}

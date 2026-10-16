@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import Pitch from "./Pitch";
-
+import "./App.css";
 const API = import.meta.env.VITE_API_URL;
 const HISTORY_LIMIT = 6; // last 6 messages = 3 question/answer pairs
 
@@ -24,8 +24,14 @@ export default function App() {
   const [selectedId, setSelectedId] = useState("");
   const [formationsError, setFormationsError] = useState("");
 
+  // Role highlighting
+  const [positions, setPositions] = useState({});
+  const [selectedPos, setSelectedPos] = useState("");
+
+  // Only scroll once the chat has started, so the pitch stays in view on first load
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messages.length === 0 && !loading) return;
+    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, loading]);
 
   useEffect(() => {
@@ -43,7 +49,26 @@ export default function App() {
     loadFormations();
   }, []);
 
+  useEffect(() => {
+    async function loadPositions() {
+      try {
+        const res = await fetch(`${API}/positions`);
+        if (!res.ok) return;
+        setPositions(await res.json());
+      } catch {
+        // Role cards are optional, so fail quietly
+      }
+    }
+    loadPositions();
+  }, []);
+
   const selected = formations.find((f) => f.id === selectedId);
+  const roleInfo = selectedPos ? positions[selectedPos] : null;
+
+  function chooseFormation(id) {
+    setSelectedId(id);
+    setSelectedPos("");
+  }
 
   async function ask(q = question) {
     if (!q.trim() || loading) return;
@@ -66,6 +91,7 @@ export default function App() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Request failed");
+
       setMessages((prev) => [
         ...prev,
         {
@@ -90,165 +116,143 @@ export default function App() {
     setQuestion("");
   }
 
-  const chipStyle = {
-    padding: "6px 12px",
-    borderRadius: 16,
-    border: "1px solid #555",
-    background: "transparent",
-    color: "inherit",
-    cursor: "pointer",
-    fontSize: 14,
-  };
-
-  const activeChipStyle = {
-    ...chipStyle,
-    background: "#f5c518",
-    borderColor: "#f5c518",
-    color: "#1b1b1b",
-    fontWeight: "bold",
-  };
-
-  const userBubble = {
-    alignSelf: "flex-end",
-    maxWidth: "80%",
-    background: "#2a3b2a",
-    borderRadius: 12,
-    padding: "8px 14px",
-    textAlign: "left",
-  };
+  function handleSubmit(e) {
+    e.preventDefault();
+    ask();
+  }
 
   return (
-    <div style={{ maxWidth: 700, margin: "40px auto", padding: 16 }}>
-      <h1>FootyGEN</h1>
-
-      {/* Formation picker */}
-      <div style={{ marginBottom: 32 }}>
-        {formationsError && (
-          <p style={{ color: "red" }}>{formationsError}</p>
-        )}
-        {formations.length > 0 && (
-          <>
-            <div
-              style={{
-                display: "flex",
-                gap: 8,
-                flexWrap: "wrap",
-                justifyContent: "center",
-                marginBottom: 12,
-              }}
-            >
-              {formations.map((f) => (
-                <button
-                  key={f.id}
-                  style={f.id === selectedId ? activeChipStyle : chipStyle}
-                  onClick={() => setSelectedId(f.id)}
-                >
-                  {f.name}
-                </button>
-              ))}
-            </div>
-            {selected && (
-              <>
-                <Pitch players={selected.players} />
-                <p style={{ textAlign: "center", opacity: 0.8, marginTop: 12 }}>
-                  {selected.summary}
-                </p>
-              </>
-            )}
-          </>
-        )}
-      </div>
-
-      {messages.length === 0 && !loading && (
-        <div
-          style={{
-            marginTop: 20,
-            marginBottom: 20,
-            display: "flex",
-            gap: 8,
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}
-        >
-          {EXAMPLES.map((ex) => (
-            <button key={ex} style={chipStyle} onClick={() => ask(ex)}>
-              {ex}
-            </button>
-          ))}
-        </div>
-      )}
-
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {messages.map((m, i) => {
-          if (m.role === "user") {
-            return (
-              <div key={i} style={userBubble}>
-                {m.content}
-              </div>
-            );
-          }
-
-          if (m.error) {
-            return (
-              <p key={i} style={{ color: "red", textAlign: "left" }}>
-                {m.content}
-              </p>
-            );
-          }
-
-          return (
-            <div key={i} style={{ textAlign: "left" }}>
-              <div
-                style={
-                  m.answered
-                    ? {}
-                    : {
-                        background: "#3a2f1a",
-                        border: "1px solid #b8860b",
-                        borderRadius: 8,
-                        padding: "4px 16px",
-                      }
-                }
-              >
-                <ReactMarkdown>{m.content}</ReactMarkdown>
-              </div>
-              {m.sources.length > 0 && (
-                <div style={{ marginTop: 8, fontSize: 14, opacity: 0.7 }}>
-                  <strong>Sources:</strong>
-                  <ul>
-                    {m.sources.map((s, j) => (
-                      <li key={j}>
-                        {s.title} · {s.section}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          );
-        })}
-
-        {loading && (
-          <p style={{ textAlign: "left", opacity: 0.7 }}>Thinking...</p>
-        )}
-        <div ref={bottomRef} />
-      </div>
-
-      <input
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && ask()}
-        placeholder="Ask about football..."
-        style={{ width: "100%", padding: 10, fontSize: 16, marginTop: 20 }}
-      />
-      <div
-        style={{ marginTop: 10, display: "flex", gap: 8, justifyContent: "center" }}
-      >
-        <button onClick={() => ask()} disabled={loading}>
-          {loading ? "Thinking..." : "Ask"}
+    <div className="app">
+      <header className="topbar">
+        <h1>FootyGEN</h1>
+        <button className="btn btn-ghost" onClick={newChat}>
+          New chat
         </button>
-        <button onClick={newChat}>New Chat</button>
-      </div>
+      </header>
+
+      <main className="layout">
+        {/* Pitch panel */}
+        <section className="pitch-panel" aria-label="Formations">
+          {formationsError && <p className="error-text">{formationsError}</p>}
+
+          {formations.length > 0 && (
+            <>
+              <div className="chip-row">
+                {formations.map((f) => (
+                  <button
+                    key={f.id}
+                    className={`chip${f.id === selectedId ? " chip-active" : ""}`}
+                    onClick={() => chooseFormation(f.id)}
+                  >
+                    {f.name}
+                  </button>
+                ))}
+              </div>
+
+              {selected && (
+                <>
+                  <Pitch
+                    players={selected.players}
+                    selectedPos={selectedPos}
+                    onSelect={setSelectedPos}
+                  />
+
+                  {roleInfo ? (
+                    <div className="role-card">
+                      <strong>{roleInfo.name}</strong>
+                      <p>{roleInfo.description}</p>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => ask(roleInfo.question)}
+                        disabled={loading}
+                      >
+                        Ask about this role
+                      </button>
+                    </div>
+                  ) : (
+                    <p className="pitch-hint">
+                      {selected.summary} Tap a player to see their role.
+                    </p>
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </section>
+
+        {/* Chat panel */}
+        <section className="chat-panel" aria-label="Chat">
+          <div className="messages">
+            {messages.length === 0 && !loading && (
+              <div className="empty">
+                <p>Ask anything about tactics, roles, managers or the laws of the game.</p>
+                <div className="chip-row">
+                  {EXAMPLES.map((ex) => (
+                    <button key={ex} className="chip" onClick={() => ask(ex)}>
+                      {ex}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {messages.map((m, i) => {
+              if (m.role === "user") {
+                return (
+                  <div key={i} className="bubble-user">
+                    {m.content}
+                  </div>
+                );
+              }
+
+              if (m.error) {
+                return (
+                  <p key={i} className="error-text">
+                    {m.content}
+                  </p>
+                );
+              }
+
+              return (
+                <div key={i} className="answer">
+                  <div className={m.answered ? "answer-body" : "answer-body answer-fallback"}>
+                    <ReactMarkdown>{m.content}</ReactMarkdown>
+                  </div>
+
+                  {m.sources.length > 0 && (
+                    <div className="sources">
+                      <strong>Sources</strong>
+                      <ul>
+                        {m.sources.map((s, j) => (
+                          <li key={j}>
+                            {s.title} · {s.section}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+
+            {loading && <p className="thinking">Thinking...</p>}
+            <div ref={bottomRef} />
+          </div>
+
+          <form className="composer" onSubmit={handleSubmit}>
+            <input
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Ask about football..."
+              enterKeyHint="send"
+              aria-label="Your question"
+            />
+            <button className="btn btn-primary" type="submit" disabled={loading}>
+              {loading ? "..." : "Ask"}
+            </button>
+          </form>
+        </section>
+      </main>
     </div>
   );
 }

@@ -14,9 +14,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const formations = JSON.parse(
   readFileSync(path.join(__dirname, "formations.json"), "utf-8")
 );
+const positions = JSON.parse(
+  readFileSync(path.join(__dirname, "positions.json"), "utf-8")
+);
 
 const app = express();
-app.use(cors());
+const allowedOrigins = [
+  process.env.FRONTEND_URL, // your Vercel URL, set on Render (no trailing slash)
+  "http://localhost:5173", // local dev
+].filter(Boolean);
+
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
 // Behind Render's proxy, trust the first hop so the limiter sees real visitor IPs
@@ -49,6 +57,11 @@ app.get("/formations/:id", (req, res) => {
     return res.status(404).json({ error: "Formation not found." });
   }
   res.json(formation);
+});
+
+// All position descriptions, keyed by position code (GK, LB, ST, ...)
+app.get("/positions", (req, res) => {
+  res.json(positions);
 });
 
 // Keeps only the last 6 valid messages, trimmed in length
