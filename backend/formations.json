@@ -1,0 +1,92 @@
+[
+  {
+    "id": "4-4-2",
+    "name": "4-4-2",
+    "summary": "Two banks of four with a striker pair. Simple, balanced and compact.",
+    "players": [
+      { "pos": "GK", "x": 50, "y": 92 },
+      { "pos": "LB", "x": 15, "y": 75 },
+      { "pos": "LCB", "x": 38, "y": 77 },
+      { "pos": "RCB", "x": 62, "y": 77 },
+      { "pos": "RB", "x": 85, "y": 75 },
+      { "pos": "LM", "x": 12, "y": 50 },
+      { "pos": "LCM", "x": 38, "y": 52 },
+      { "pos": "RCM", "x": 62, "y": 52 },
+      { "pos": "RM", "x": 88, "y": 50 },
+      { "pos": "LST", "x": 36, "y": 22 },
+      { "pos": "RST", "x": 64, "y": 22 }
+    ]
+  },
+  {
+    "id": "4-3-3",
+    "name": "4-3-3",
+    "summary": "Back four, a three-man midfield and a front three that presses from the front.",
+    "players": [
+      { "pos": "GK", "x": 50, "y": 92 },
+      { "pos": "LB", "x": 15, "y": 75 },
+      { "pos": "LCB", "x": 38, "y": 77 },
+      { "pos": "RCB", "x": 62, "y": 77 },
+      { "pos": "RB", "x": 85, "y": 75 },
+      { "pos": "DM", "x": 50, "y": 58 },
+      { "pos": "LCM", "x": 30, "y": 46 },
+      { "pos": "RCM", "x": 70, "y": 46 },
+      { "pos": "LW", "x": 14, "y": 22 },
+      { "pos": "ST", "x": 50, "y": 18 },
+      { "pos": "RW", "x": 86, "y": 22 }
+    ]
+  },
+  {
+    "id": "4-2-3-1",
+    "name": "4-2-3-1",
+    "summary": "Two holding midfielders behind a line of three, with a lone striker.",
+    "players": [
+      { "pos": "GK", "x": 50, "y": 92 },
+      { "pos": "LB", "x": 15, "y": 75 },
+      { "pos": "LCB", "x": 38, "y": 77 },
+      { "pos": "RCB", "x": 62, "y": 77 },
+      { "pos": "RB", "x": 85, "y": 75 },
+      { "pos": "LDM", "x": 36, "y": 58 },
+      { "pos": "RDM", "x": 64, "y": 58 },
+      { "pos": "LW", "x": 14, "y": 38 },
+      { "pos": "CAM", "x": 50, "y": 36 },
+      { "pos": "RW", "x": 86, "y": 38 },
+      { "pos": "ST", "x": 50, "y": 16 }
+    ]
+  },
+  {
+    "id": "4-1-4-1",
+    "name": "4-1-4-1",
+    "summary": "A single holding midfielder shields the back four, with a flat midfield four ahead.",
+    "players": [
+      { "pos": "GK", "x": 50, "y": 92 },
+      { "pos": "LB", "x": 15, "y": 75 },
+      { "pos": "LCB", "x": 38, "y": 77 },
+      { "pos": "RCB", "x": 62, "y": 77 },
+      { "pos": "RB", "x": 85, "y": 75 },
+      { "pos": "DM", "x": 50, "y": 60 },
+      { "pos": "LM", "x": 12, "y": 44 },
+      { "pos": "LCM", "x": 36, "y": 46 },
+      { "pos": "RCM", "x": 64, "y": 46 },
+      { "pos": "RM", "x": 88, "y": 44 },
+      { "pos": "ST", "x": 50, "y": 18 }
+    ]
+  },
+  {
+    "id": "3-5-2",
+    "name": "3-5-2",
+    "summary": "Three centre-backs, wing-backs providing the width, and two strikers.",
+    "players": [
+      { "pos": "GK", "x": 50, "y": 92 },
+      { "pos": "LCB", "x": 25, "y": 76 },
+      { "pos": "CB", "x": 50, "y": 78 },
+      { "pos": "RCB", "x": 75, "y": 76 },
+      { "pos": "LWB", "x": 8, "y": 52 },
+      { "pos": "RWB", "x": 92, "y": 52 },
+      { "pos": "DM", "x": 50, "y": 58 },
+      { "pos": "LCM", "x": 32, "y": 45 },
+      { "pos": "RCM", "x": 68, "y": 45 },
+      { "pos": "LST", "x": 36, "y": 20 },
+      { "pos": "RST", "x": 64, "y": 20 }
+    ]
+  }
+]

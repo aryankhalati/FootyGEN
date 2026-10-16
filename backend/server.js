@@ -1,11 +1,19 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
+import path from "path";
 import { answerQuestion } from "./rag.js";
 import { CATEGORIES } from "./retriever.js";
 import rateLimit from "express-rate-limit";
 
 dotenv.config();
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const formations = JSON.parse(
+  readFileSync(path.join(__dirname, "formations.json"), "utf-8")
+);
 
 const app = express();
 app.use(cors());
@@ -27,6 +35,20 @@ app.use("/ask", askLimiter);
 // Health check: tells us the server is alive
 app.get("/health", (req, res) => {
   res.json({ status: "ok", app: "FootyGEN" });
+});
+
+// List of all formations (id, name, summary, players)
+app.get("/formations", (req, res) => {
+  res.json(formations);
+});
+
+// One formation by id, e.g. /formations/4-4-2
+app.get("/formations/:id", (req, res) => {
+  const formation = formations.find((f) => f.id === req.params.id);
+  if (!formation) {
+    return res.status(404).json({ error: "Formation not found." });
+  }
+  res.json(formation);
 });
 
 // Keeps only the last 6 valid messages, trimmed in length
