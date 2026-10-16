@@ -1,0 +1,600 @@
+{
+  "date": "2026-10-16T13:14:09.497Z",
+  "score": "35/40",
+  "results": [
+    {
+      "id": "01",
+      "category": "laws",
+      "question": "What is an offside position?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "An off‑side position occurs when a player is in the opponent’s half and any part of their head, body or feet is closer to the opponents’ goal line than both the ball and the second‑last opponent (the goalkeeper is usually the last opponent). Hands and arms are ignored, and the position is judged at the moment a teammate plays or touches the ball.",
+      "answered": true,
+      "topScore": 0.621921659,
+      "sources": [
+        "Offside Rule > What is an offside position?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "02",
+      "category": "laws",
+      "question": "Can you be offside directly from a throw-in?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "No. A player cannot be penalised for off‑side when receiving the ball straight from a throw‑in.",
+      "answered": true,
+      "topScore": 0.549864054,
+      "sources": [
+        "Offside Rule > Where does offside not apply?",
+        "Throw-ins, Goal Kicks and Corners > Can a goal be scored directly from these restarts?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "03",
+      "category": "laws",
+      "question": "How far is the penalty mark from the goal line?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "The penalty mark is positioned 11 metres (12 yards) from the goal line.",
+      "answered": true,
+      "topScore": 0.607930541,
+      "sources": [
+        "Penalty Kicks and Free Kick Rules > Where is a penalty kick taken from?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "04",
+      "category": "laws",
+      "question": "How many penalty kicks does each team take at the start of a shoot-out?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "Each team initially takes five penalty kicks, alternating with the opponent.",
+      "answered": true,
+      "topScore": 0.666477799,
+      "sources": [
+        "Match Duration, Extra Time, Shootouts and Substitutions > How does a penalty shoot-out work?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "05",
+      "category": "laws",
+      "question": "How many substitutions are allowed in a match?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "The Laws of the Game permit a maximum of five substitutions to be made in a match (subject to the limited number of stoppages and with half‑time not counting). Competition rules may set how many substitutes can be named, but the standard allowance is up to five changes.",
+      "answered": true,
+      "topScore": 0.611855388,
+      "sources": [
+        "Match Duration, Extra Time, Shootouts and Substitutions > How do substitutions work?",
+        "Match Duration, Extra Time, Shootouts and Substitutions > Summary"
+      ],
+      "missing": []
+    },
+    {
+      "id": "06",
+      "category": "laws",
+      "question": "How quickly must a substituted player leave the field?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "A substituted player must be off the pitch within 10 seconds of the substitution board being shown or of the referee’s signal. If the player is slow, the substitute cannot enter until the next stoppage after one minute of play.",
+      "answered": true,
+      "topScore": 0.566938281,
+      "sources": [
+        "Match Duration, Extra Time, Shootouts and Substitutions > How do substitutions work?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "07",
+      "category": "laws",
+      "question": "What happens if a throw-in is deliberately delayed?",
+      "pass": false,
+      "retrievalHit": true,
+      "answer": "If the referee believes a throw‑in is being deliberately delayed, he starts a five‑second visual countdown. Should the ball still not be in play when the countdown ends, the throw‑in is awarded to the opposing team.",
+      "answered": true,
+      "topScore": 0.507448375,
+      "sources": [
+        "Throw-ins, Goal Kicks and Corners > What are the throw-in restrictions?"
+      ],
+      "missing": [
+        "opponents"
+      ],
+      "reason": "answer is missing expected keywords"
+    },
+    {
+      "id": "08",
+      "category": "laws",
+      "question": "How long can a goalkeeper hold the ball?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "A goalkeeper may handle the ball for up to eight seconds. The referee will display a visual five‑second countdown, and if the keeper still has the ball when that time expires the opponents are awarded a corner kick.",
+      "answered": true,
+      "topScore": 0.603868723,
+      "sources": [
+        "Goalkeeper and the Sweeper-Keeper > How do the rules treat a goalkeeper?",
+        "Handball Rules > Goalkeepers"
+      ],
+      "missing": []
+    },
+    {
+      "id": "09",
+      "category": "laws",
+      "question": "Can VAR review a second yellow card?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "VAR does not normally review a second‑yellow booking. Under the standard protocol a second yellow is not subject to review, except when that second yellow results in a red card and the decision is clearly incorrect – in that case VAR can intervene to correct the red‑card situation.",
+      "answered": true,
+      "topScore": 0.640405416,
+      "sources": [
+        "What VAR Can and Cannot Review > What can VAR not review?",
+        "What VAR Can and Cannot Review > What can VAR review?",
+        "Fouls and Cards > What changed for cards in the 2026/27 Laws?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "10",
+      "category": "laws",
+      "question": "What gets a red card?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "A player is sent off (shown a red card) for any of the following offences: serious foul play (a challenge using excessive force that endangers an opponent’s safety), violent conduct, spitting at or biting someone, denying a goal‑scoring opportunity or an obvious goal‑scoring opportunity by a foul or handball, using offensive, insulting or abusive language or gestures, and receiving a second yellow card in the same match.",
+      "answered": true,
+      "topScore": 0.65509,
+      "sources": [
+        "Fouls and Cards > What gets a red card?",
+        "Fouls and Cards > What do careless, reckless and excessive force mean?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "11",
+      "category": "laws",
+      "question": "What does DOGSO mean?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "DOGSO stands for “denying an obvious goal‑scoring opportunity.” It refers to a foul that stops a clear chance to score, with the referee judging factors such as distance to goal, direction of play, ball control chances, and the positions of defenders and attackers. If the offence stops the opportunity, the player is normally sent off; if it occurs in the offender’s penalty area and the player attempted to play the ball, the punishment is a penalty kick and a yellow card. Holding, pulling, pushing or serious foul play in such a situation also results in a red card.",
+      "answered": true,
+      "topScore": 0.228886187,
+      "sources": [
+        "Fouls and Cards > What is denying an obvious goal-scoring opportunity?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "12",
+      "category": "laws",
+      "question": "Where is the upper edge of the arm for handball?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "The upper edge of the arm for handball is defined as the bottom of the armpit.",
+      "answered": true,
+      "topScore": 0.633350432,
+      "sources": [
+        "Handball Rules > What counts as the hand and arm?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "13",
+      "category": "managers",
+      "question": "Who manages Manchester City?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "Enzo Maresca took over as Manchester City’s manager in June 2026, after Pep Guardiola left at the end of the 2025‑26 season.",
+      "answered": true,
+      "topScore": 0.462974578,
+      "sources": [
+        "Pep Guardiola: Philosophy and Teams > How did his Manchester City team play?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "14",
+      "category": "managers",
+      "question": "How many Premier League titles did Alex Ferguson win?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "Sir Alex Ferguson won 13 Premier League titles with Manchester United.",
+      "answered": true,
+      "topScore": 0.65927732,
+      "sources": [
+        "Sir Alex Ferguson: The Treble Side and the 2007-2009 Team > Summary"
+      ],
+      "missing": []
+    },
+    {
+      "id": "15",
+      "category": "managers",
+      "question": "How did Manchester United win the 1999 Champions League final?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "Manchester United beat Bayern Munich 2‑1 by scoring two stoppage‑time goals. Bayern had led for most of the match, but Teddy Sheringham struck first and Ole Gunnar Solskjær added the winner in added time, securing the victory.",
+      "answered": true,
+      "topScore": 0.578580558,
+      "sources": [
+        "Sir Alex Ferguson: The Treble Side and the 2007-2009 Team > How did United win the Champions League in 1999?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "16",
+      "category": "managers",
+      "question": "How many times has Ancelotti won the Champions League as a manager?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "Carlo Ancelotti has lifted the Champions League trophy five times as a manager.",
+      "answered": true,
+      "topScore": 0.668507,
+      "sources": [
+        "Carlo Ancelotti: Man-Management and Tactical Flexibility > Summary"
+      ],
+      "missing": []
+    },
+    {
+      "id": "17",
+      "category": "managers",
+      "question": "What is La Decima?",
+      "pass": false,
+      "retrievalHit": true,
+      "answer": "La Decima refers to Real Madrid’s tenth European Cup/Champions League triumph, which they secured in the 2013‑14 season.",
+      "answered": true,
+      "topScore": 0.342706919,
+      "sources": [
+        "Carlo Ancelotti: Man-Management and Tactical Flexibility > How did he win La Decima with Real Madrid?"
+      ],
+      "missing": [
+        "real madrid | madrid"
+      ],
+      "reason": "answer is missing expected keywords"
+    },
+    {
+      "id": "18",
+      "category": "managers",
+      "question": "What is gegenpressing?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "Gegenpressing is simply another name for counter‑pressing – the tactic of applying immediate pressure the instant a team loses possession, aiming to win the ball back before the opponent can set up a counter‑attack and to deny them the space created by the loss. It requires players to stay close enough to the ball to press together as a unit.",
+      "answered": true,
+      "topScore": 0.45853132,
+      "sources": [
+        "High Press and Counter-Pressing > Summary",
+        "High Press and Counter-Pressing > What is counter-pressing?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "19",
+      "category": "managers",
+      "question": "What was Arrigo Sacchi known for at AC Milan?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "Arrigo Sacchi is best remembered at AC Milan for introducing an aggressive, collective pressing system combined with zonal defending and a very compact team shape. His side moved as a unit, kept the lines close together, pressed high up the pitch and operated a high defensive line with an off‑side trap.",
+      "answered": true,
+      "topScore": 0.714298487,
+      "sources": [
+        "Arrigo Sacchi: Pressing and the Compact Line at Milan > Summary",
+        "Arrigo Sacchi: Pressing and the Compact Line at Milan > What is his philosophy?",
+        "Arrigo Sacchi: Pressing and the Compact Line at Milan > How did his Milan team play?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "20",
+      "category": "managers",
+      "question": "What did Mourinho win with Inter in 2010?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "Mourinho’s Inter side captured the Serie A title, the Coppa Italia and the UEFA Champions League in 2010.",
+      "answered": true,
+      "topScore": 0.556420505,
+      "sources": [
+        "José Mourinho: Defensive Organisation and Counter-Attacking > How did his Inter team play?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "21",
+      "category": "roles",
+      "question": "What is a false 9?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "A false 9 is a central forward who begins in the traditional striker’s position but repeatedly drops into the space between the opposition’s midfield and defence. From there he receives the ball, links play, passes to on‑the‑run teammates, and can also dribble or shoot. This dropping movement is a planned, regular part of the team’s attack and changes the shape of the side, giving the team an extra player in midfield and forcing defenders to decide whether to follow him or stay in line.",
+      "answered": true,
+      "topScore": 0.548847914,
+      "sources": [
+        "False 9 Role > What does a false 9 do?",
+        "False 9 Role > Summary"
+      ],
+      "missing": []
+    },
+    {
+      "id": "22",
+      "category": "roles",
+      "question": "What is a wing-back?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "A wing‑back is the wide player in a system that uses three centre‑backs. He covers the whole flank, defending near his own box and attacking near the opponent’s goal line, essentially blending the responsibilities of a full‑back and a winger. Because he must provide width while also tracking back, the role demands high stamina and the ability to contribute both defensively and offensively.",
+      "answered": true,
+      "topScore": 0.63611728,
+      "sources": [
+        "Wing-Back Role > Summary",
+        "Wing-Back Role > How is a wing-back different from a full-back?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "23",
+      "category": "roles",
+      "question": "What does an inverted full-back do?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "An inverted full‑back steps inside when the team is in possession, positioning himself next to the defensive midfielder (the No. 6) or even ahead of the centre‑backs. From that central spot he can receive the ball between the lines, help circulate it forward and create overloads in midfield. This movement can effectively turn a back four into a back three with two midfielders in front, often described as a 3‑2‑5 shape when the side attacks.",
+      "answered": true,
+      "topScore": 0.662442386,
+      "sources": [
+        "Inverted Full-Back Role > What does an inverted full-back do?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "24",
+      "category": "roles",
+      "question": "What is the difference between a target man and a poacher?",
+      "pass": false,
+      "retrievalHit": true,
+      "answer": "A target man is a strong, often taller striker who plays with his back to goal, holds up the ball, wins aerial duels and creates space for teammates. He is used in teams that rely on long passes or crosses and helps the side move the ball up the pitch.  \n\nA poacher, by contrast, stays face‑to‑goal inside the penalty area, makes quick, well‑timed runs, and is judged mainly on scoring from close‑range chances. He depends on service from wingers, full‑backs or midfield runners and contributes less to build‑up play.  \n\nIn short, the target man’s job is to win and hold the ball and involve others, while the poacher’s job is to finish the chances created for him.",
+      "answered": true,
+      "topScore": 0.596203804,
+      "sources": [
+        "Target Man and Poacher Roles > How do the two roles compare?",
+        "Target Man and Poacher Roles > Summary",
+        "Target Man and Poacher Roles > What qualities do a target man and a poacher need?"
+      ],
+      "missing": [
+        "box | close to goal | score | scores"
+      ],
+      "reason": "answer is missing expected keywords"
+    },
+    {
+      "id": "25",
+      "category": "roles",
+      "question": "What does a sweeper-keeper do?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "A sweeper‑keeper is a goalkeeper who operates far up the pitch, often at the edge of or beyond the penalty area, to cover the space behind a high defensive line. By positioning high they can intercept or clear through‑balls before attackers reach them, effectively acting as an extra defender. Because they spend time outside the box they also need to be comfortable with the ball at their feet and able to play it out as part of the team’s build‑up.",
+      "answered": true,
+      "topScore": 0.509950817,
+      "sources": [
+        "Goalkeeper and the Sweeper-Keeper > What is a sweeper-keeper?",
+        "Goalkeeper and the Sweeper-Keeper > Summary"
+      ],
+      "missing": []
+    },
+    {
+      "id": "26",
+      "category": "tactics",
+      "question": "What is the difference between a high press and counter-pressing?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "A high press is a proactive, pre‑planned defensive shape that the team adopts when the opponent is building from their own half; the unit presses high up the pitch to force errors or win the ball near the opponent’s goal. Counter‑pressing, by contrast, is a reactive action taken the instant a team loses possession while attacking – the players immediately close down the opponent to recover the ball before a counter‑attack can develop. In short, the high press is initiated based on where the opponent has the ball, whereas counter‑pressing is triggered the moment possession is lost.",
+      "answered": true,
+      "topScore": 0.641728222,
+      "sources": [
+        "High Press and Counter-Pressing > How are the two different?",
+        "High Press and Counter-Pressing > Summary"
+      ],
+      "missing": []
+    },
+    {
+      "id": "27",
+      "category": "tactics",
+      "question": "What is a low block?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "A low block is a defensive approach where the team retreats deep into its own half, keeping a compact shape close to its own goal. The back line sits near the penalty area while midfielders and forwards also drop back, creating many bodies between the ball and the goal. This limits the opponent’s space in central areas and makes it difficult for them to play through the middle or behind the defence. It is a tactical choice rather than a fixed formation and can be employed for an entire match or just portions of it.",
+      "answered": true,
+      "topScore": 0.451613694,
+      "sources": [
+        "Low Block Defending > Summary",
+        "Low Block Defending > What is a low block?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "28",
+      "category": "tactics",
+      "question": "What is the offside trap?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "The offside trap is a defensive tactic where the back line steps forward together just before a pass is played, leaving the attacking player in an off‑side position. Because the attacker is then considered off‑side when involved in play, the defending team is awarded a free kick.",
+      "answered": true,
+      "topScore": 0.593053102,
+      "sources": [
+        "High Defensive Line and the Offside Trap > What is the offside trap?",
+        "High Defensive Line and the Offside Trap > Summary"
+      ],
+      "missing": []
+    },
+    {
+      "id": "29",
+      "category": "tactics",
+      "question": "What is the difference between man-marking and zonal marking?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "Man‑marking assigns each defender to a specific opponent, so the defender follows that player wherever they go and his position is dictated by the opponent’s movements rather than the team’s shape. Zonal marking, by contrast, gives each defender a defined area of the pitch to protect; any attacker who enters that zone is marked, and when they leave the defender hands them over to a teammate, allowing the defensive line to move together and keep its shape.",
+      "answered": true,
+      "topScore": 0.586004794,
+      "sources": [
+        "Man-Marking and Zonal Marking > What is zonal marking?",
+        "Man-Marking and Zonal Marking > What is man-marking?"
+      ],
+      "missing": []
+    },
+    {
+      "id": "30",
+      "category": "tactics",
+      "question": "What is rest defence?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "Rest defence refers to the group of players who stay in a safe, deeper position behind the ball while the rest of the team is in attack. They are not actively defending at that moment, but they are positioned to react instantly if possession is lost, with the job of stopping any counter‑attack before it develops. This structure is planned in advance of losing the ball, not as a reaction after the loss.",
+      "answered": true,
+      "topScore": 0.558823884,
+      "sources": [
+        "Transitions and Rest Defence > What is rest defence?",
+        "Transitions and Rest Defence > Summary"
+      ],
+      "missing": []
+    },
+    {
+      "id": "31",
+      "category": "tactics",
+      "question": "What is counter-attacking?",
+      "pass": false,
+      "retrievalHit": true,
+      "answer": "Counter‑attacking is a style of play where, as soon as a team wins the ball, it moves it forward rapidly—usually with few passes and a lot of speed—to exploit the space left by an opponent who has pushed players forward. The aim is to reach that space and create a scoring chance before the opposition can reorganise defensively. It’s a tactical approach, not a specific formation.",
+      "answered": true,
+      "topScore": 0.622846,
+      "sources": [
+        "Counter-Attacking > Summary",
+        "Counter-Attacking > What is a counter-attack?"
+      ],
+      "missing": [
+        "quickly | quick | fast"
+      ],
+      "reason": "answer is missing expected keywords"
+    },
+    {
+      "id": "32",
+      "category": "formations",
+      "question": "What is a 4-3-3 formation?",
+      "pass": false,
+      "retrievalHit": true,
+      "answer": "A 4‑3‑3 lines up with four defenders (two centre‑backs and two full‑backs), three midfielders (typically a deeper‑lying player plus two more advanced ones) and three attackers – a left winger, a central striker and a right winger. The numbers refer to the starting shape; in different phases the shape can shift (e.g., becoming a 2‑3‑5 in possession or a 4‑1‑4‑1 when defending).",
+      "answered": true,
+      "topScore": 0.691755,
+      "sources": [
+        "4-3-3 Formation > Summary"
+      ],
+      "missing": [
+        "three forwards | 3 forwards"
+      ],
+      "reason": "answer is missing expected keywords"
+    },
+    {
+      "id": "33",
+      "category": "formations",
+      "question": "Why do 3-5-2 teams need wing-backs?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "Wing‑backs are essential in a 3‑5‑2 because the back three protects the centre but leaves the wide areas empty. The wing‑backs therefore supply the team’s width, push high to deliver crosses, overlap the midfield and act as the primary outlet on the flanks. They also have to cover the whole side defensively, filling the full‑back role when the team is out of possession, which lets the three centre‑backs stay compact in the middle. In short, without wing‑backs the formation would lack the necessary width in attack and the defensive coverage on the sides.",
+      "answered": true,
+      "topScore": 0.654899955,
+      "sources": [
+        "3-5-2 Formation > In possession: wing-backs",
+        "3-5-2 Formation > Shape and roles",
+        "3-5-2 Formation > Strengths"
+      ],
+      "missing": []
+    },
+    {
+      "id": "34",
+      "category": "formations",
+      "question": "What is the double pivot in a 4-2-3-1?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "The double pivot refers to the two central (holding) midfielders that sit in front of the centre‑backs in a 4‑2‑3‑1. They form a paired midfield block that gives the team short passing options out of the back, protects the centre of the pitch, recycles possession, and provides the foundation for both attacking build‑up and defensive transitions. Their coordination—whether one stays back while the other steps forward or they share defensive and passing duties—keeps the back four compact and guards against counter‑attacks.",
+      "answered": true,
+      "topScore": 0.627751946,
+      "sources": [
+        "4-2-3-1 Formation > In possession: build-up",
+        "4-2-3-1 Formation > Out of possession: defensive blocks",
+        "4-2-3-1 Formation > Rest defence",
+        "4-2-3-1 Formation > Transitions",
+        "4-2-3-1 Formation > Double pivot variations"
+      ],
+      "missing": []
+    },
+    {
+      "id": "35",
+      "category": "formations",
+      "question": "How does a 4-4-2 change when attacking?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "When the 4‑4‑2 goes forward it stretches out of its compact “two banks of four” shape. The wide midfielders push high, often joining the full‑backs to give the team width, while one central midfielder stays back with the two centre‑backs to protect against counters and the other moves higher to support the attack. The two strikers become the main outlets – one can drop to link play while the other makes runs in behind – and they also press the opposition centre‑backs. This more advanced shape creates a 4‑2‑4‑type look in possession, with the full‑backs and the free central midfielder free to join the attack while the holding midfielder shields the defence.",
+      "answered": true,
+      "topScore": 0.631180525,
+      "sources": [
+        "4-4-2 Formation > Transitions",
+        "4-4-2 Formation > Summary",
+        "4-4-2 Formation > Rest defence",
+        "4-4-2 Formation > In possession: build-up"
+      ],
+      "missing": []
+    },
+    {
+      "id": "36",
+      "category": "out-of-scope",
+      "question": "Who won the 2018 World Cup?",
+      "pass": true,
+      "retrievalHit": null,
+      "answer": "That's outside what I cover. I can help with football formations and tactics, like how a 4-3-3 presses or what a false 9 does.",
+      "answered": false,
+      "topScore": 0.256870061,
+      "sources": []
+    },
+    {
+      "id": "37",
+      "category": "out-of-scope",
+      "question": "Give me a recipe for paneer butter masala.",
+      "pass": true,
+      "retrievalHit": null,
+      "answer": "That's outside what I cover. I can help with football formations and tactics, like how a 4-3-3 presses or what a false 9 does.",
+      "answered": false,
+      "topScore": 0.140169919,
+      "sources": []
+    },
+    {
+      "id": "38",
+      "category": "out-of-scope",
+      "question": "What is the weather in Pune today?",
+      "pass": true,
+      "retrievalHit": null,
+      "answer": "That's outside what I cover. I can help with football formations and tactics, like how a 4-3-3 presses or what a false 9 does.",
+      "answered": false,
+      "topScore": 0.11163602,
+      "sources": []
+    },
+    {
+      "id": "39",
+      "category": "out-of-scope",
+      "question": "Write a Python function to reverse a string.",
+      "pass": true,
+      "retrievalHit": null,
+      "answer": "That's outside what I cover. I can help with football formations and tactics, like how a 4-3-3 presses or what a false 9 does.",
+      "answered": false,
+      "topScore": 0.166313022,
+      "sources": []
+    },
+    {
+      "id": "40",
+      "category": "cross-doc",
+      "question": "Which managers are known for pressing?",
+      "pass": true,
+      "retrievalHit": true,
+      "answer": "The managers most closely associated with pressing styles are Jürgen Klopp, Arrigo Sacchi and Pep Guardiola.",
+      "answered": true,
+      "topScore": 0.398986,
+      "sources": [
+        "High Press and Counter-Pressing > Which teams are known for it?",
+        "Arrigo Sacchi: Pressing and the Compact Line at Milan > Summary",
+        "Jürgen Klopp: Gegenpressing Philosophy and Teams > Summary"
+      ],
+      "missing": []
+    }
+  ]
+}

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 
 const API = import.meta.env.VITE_API_URL;
+const HISTORY_LIMIT = 6; // last 6 messages = 3 question/answer pairs
 
 const EXAMPLES = [
   "What is the offside rule?",
@@ -11,44 +12,59 @@ const EXAMPLES = [
 ];
 
 export default function App() {
+  // Each message: { role: "user" | "assistant", content, sources?, answered?, error? }
+  const [messages, setMessages] = useState([]);
   const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [sources, setSources] = useState([]);
-  const [answered, setAnswered] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
 
   async function ask(q = question) {
-    if (!q.trim()) return;
-    setQuestion(q);
+    if (!q.trim() || loading) return;
+
+    // History = last few messages before this question. Skip errors, send only role + content.
+    const history = messages
+      .filter((m) => !m.error)
+      .slice(-HISTORY_LIMIT)
+      .map((m) => ({ role: m.role, content: m.content }));
+
+    setMessages((prev) => [...prev, { role: "user", content: q }]);
+    setQuestion("");
     setLoading(true);
-    setError("");
-    setAnswer("");
-    setSources([]);
+
     try {
       const res = await fetch(`${API}/ask`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: q }),
+        body: JSON.stringify({ question: q, history }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Request failed");
-      setAnswer(data.answer);
-      setSources(data.sources || []);
-      setAnswered(data.answered !== false);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: data.answer,
+          sources: data.sources || [],
+          answered: data.answered !== false,
+        },
+      ]);
     } catch (e) {
-      setError(e.message);
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: e.message, error: true },
+      ]);
     } finally {
       setLoading(false);
     }
   }
 
   function newChat() {
+    setMessages([]);
     setQuestion("");
-    setAnswer("");
-    setSources([]);
-    setAnswered(true);
-    setError("");
   }
 
   const chipStyle = {
@@ -61,27 +77,24 @@ export default function App() {
     fontSize: 14,
   };
 
+  const userBubble = {
+    alignSelf: "flex-end",
+    maxWidth: "80%",
+    background: "#2a3b2a",
+    borderRadius: 12,
+    padding: "8px 14px",
+    textAlign: "left",
+  };
+
   return (
     <div style={{ maxWidth: 700, margin: "40px auto", padding: 16 }}>
       <h1>FootyGEN</h1>
-      <input
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && ask()}
-        placeholder="Ask about football..."
-        style={{ width: "100%", padding: 10, fontSize: 16 }}
-      />
-      <div style={{ marginTop: 10, display: "flex", gap: 8, justifyContent: "center" }}>
-        <button onClick={() => ask()} disabled={loading}>
-          {loading ? "Thinking..." : "Ask"}
-        </button>
-        <button onClick={newChat}>New Chat</button>
-      </div>
 
-      {!answer && !loading && !error && (
+      {messages.length === 0 && !loading && (
         <div
           style={{
             marginTop: 20,
+            marginBottom: 20,
             display: "flex",
             gap: 8,
             flexWrap: "wrap",
@@ -96,36 +109,77 @@ export default function App() {
         </div>
       )}
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {answer && (
-        <div
-          style={{
-            textAlign: "left",
-            ...(answered
-              ? {}
-              : {
-                  background: "#3a2f1a",
-                  border: "1px solid #b8860b",
-                  borderRadius: 8,
-                  padding: "4px 16px",
-                }),
-          }}
-        >
-          <ReactMarkdown>{answer}</ReactMarkdown>
-        </div>
-      )}
-      {sources.length > 0 && (
-        <div style={{ marginTop: 16, fontSize: 14, opacity: 0.7, textAlign: "left" }}>
-          <strong>Sources:</strong>
-          <ul>
-            {sources.map((s, i) => (
-              <li key={i}>
-                {s.title} · {s.section}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        {messages.map((m, i) => {
+          if (m.role === "user") {
+            return (
+              <div key={i} style={userBubble}>
+                {m.content}
+              </div>
+            );
+          }
+
+          if (m.error) {
+            return (
+              <p key={i} style={{ color: "red", textAlign: "left" }}>
+                {m.content}
+              </p>
+            );
+          }
+
+          return (
+            <div key={i} style={{ textAlign: "left" }}>
+              <div
+                style={
+                  m.answered
+                    ? {}
+                    : {
+                        background: "#3a2f1a",
+                        border: "1px solid #b8860b",
+                        borderRadius: 8,
+                        padding: "4px 16px",
+                      }
+                }
+              >
+                <ReactMarkdown>{m.content}</ReactMarkdown>
+              </div>
+              {m.sources.length > 0 && (
+                <div style={{ marginTop: 8, fontSize: 14, opacity: 0.7 }}>
+                  <strong>Sources:</strong>
+                  <ul>
+                    {m.sources.map((s, j) => (
+                      <li key={j}>
+                        {s.title} · {s.section}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+        {loading && (
+          <p style={{ textAlign: "left", opacity: 0.7 }}>Thinking...</p>
+        )}
+        <div ref={bottomRef} />
+      </div>
+
+      <input
+        value={question}
+        onChange={(e) => setQuestion(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && ask()}
+        placeholder="Ask about football..."
+        style={{ width: "100%", padding: 10, fontSize: 16, marginTop: 20 }}
+      />
+      <div
+        style={{ marginTop: 10, display: "flex", gap: 8, justifyContent: "center" }}
+      >
+        <button onClick={() => ask()} disabled={loading}>
+          {loading ? "Thinking..." : "Ask"}
+        </button>
+        <button onClick={newChat}>New Chat</button>
+      </div>
     </div>
   );
 }

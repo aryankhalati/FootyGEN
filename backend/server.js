@@ -29,9 +29,25 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok", app: "FootyGEN" });
 });
 
+// Keeps only the last 6 valid messages, trimmed in length
+function cleanHistory(raw) {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .filter(
+      (m) =>
+        m &&
+        (m.role === "user" || m.role === "assistant") &&
+        typeof m.content === "string" &&
+        m.content.trim()
+    )
+    .slice(-6)
+    .map((m) => ({ role: m.role, content: m.content.slice(0, 600) }));
+}
+
 app.post("/ask", async (req, res) => {
   const question = typeof req.body?.question === "string" ? req.body.question.trim() : "";
   const category = req.body?.category || undefined;
+  const history = cleanHistory(req.body?.history);
 
   if (!question) {
     return res.status(400).json({ error: "Send a JSON body like { \"question\": \"...\" }" });
@@ -44,7 +60,7 @@ app.post("/ask", async (req, res) => {
   }
 
   try {
-    const result = await answerQuestion(question, category);
+    const result = await answerQuestion(question, category, history);
     res.json(result);
   } catch (err) {
     console.error("Ask failed:", err);
