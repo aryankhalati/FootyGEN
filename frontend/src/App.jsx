@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
+import Pitch from "./Pitch";
 
 const API = import.meta.env.VITE_API_URL;
 const HISTORY_LIMIT = 6; // last 6 messages = 3 question/answer pairs
@@ -18,9 +19,31 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef(null);
 
+  // Formation picker
+  const [formations, setFormations] = useState([]);
+  const [selectedId, setSelectedId] = useState("");
+  const [formationsError, setFormationsError] = useState("");
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
+
+  useEffect(() => {
+    async function loadFormations() {
+      try {
+        const res = await fetch(`${API}/formations`);
+        if (!res.ok) throw new Error("Could not load formations.");
+        const data = await res.json();
+        setFormations(data);
+        if (data.length > 0) setSelectedId(data[0].id);
+      } catch (e) {
+        setFormationsError(e.message);
+      }
+    }
+    loadFormations();
+  }, []);
+
+  const selected = formations.find((f) => f.id === selectedId);
 
   async function ask(q = question) {
     if (!q.trim() || loading) return;
@@ -77,6 +100,14 @@ export default function App() {
     fontSize: 14,
   };
 
+  const activeChipStyle = {
+    ...chipStyle,
+    background: "#f5c518",
+    borderColor: "#f5c518",
+    color: "#1b1b1b",
+    fontWeight: "bold",
+  };
+
   const userBubble = {
     alignSelf: "flex-end",
     maxWidth: "80%",
@@ -89,6 +120,44 @@ export default function App() {
   return (
     <div style={{ maxWidth: 700, margin: "40px auto", padding: 16 }}>
       <h1>FootyGEN</h1>
+
+      {/* Formation picker */}
+      <div style={{ marginBottom: 32 }}>
+        {formationsError && (
+          <p style={{ color: "red" }}>{formationsError}</p>
+        )}
+        {formations.length > 0 && (
+          <>
+            <div
+              style={{
+                display: "flex",
+                gap: 8,
+                flexWrap: "wrap",
+                justifyContent: "center",
+                marginBottom: 12,
+              }}
+            >
+              {formations.map((f) => (
+                <button
+                  key={f.id}
+                  style={f.id === selectedId ? activeChipStyle : chipStyle}
+                  onClick={() => setSelectedId(f.id)}
+                >
+                  {f.name}
+                </button>
+              ))}
+            </div>
+            {selected && (
+              <>
+                <Pitch players={selected.players} />
+                <p style={{ textAlign: "center", opacity: 0.8, marginTop: 12 }}>
+                  {selected.summary}
+                </p>
+              </>
+            )}
+          </>
+        )}
+      </div>
 
       {messages.length === 0 && !loading && (
         <div
