@@ -4,7 +4,7 @@ import { pc, embedQuery } from "./embedder.js";
 const index = pc.index(process.env.PINECONE_INDEX);
 
 export const TOP_K = 6;
-export const MIN_TOP_SCORE = 0.2; // provisional floor, only catches obvious junk
+export const MIN_TOP_SCORE = 0.3; // retuned for the 39-doc knowledge base
 
 export async function retrieve(question) {
   const vector = await embedQuery(question);
