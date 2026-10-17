@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import path from "path";
-import { answerQuestion, compareFormations } from "./rag.js";
+import { answerQuestion, compareFormations, LEVELS } from "./rag.js";
 import { CATEGORIES } from "./retriever.js";
 import rateLimit from "express-rate-limit";
 
@@ -83,6 +83,7 @@ app.post("/ask", async (req, res) => {
   const question = typeof req.body?.question === "string" ? req.body.question.trim() : "";
   const category = req.body?.category || undefined;
   const history = cleanHistory(req.body?.history);
+  const level = req.body?.level || "beginner";
 
   if (!question) {
     return res.status(400).json({ error: "Send a JSON body like { \"question\": \"...\" }" });
@@ -93,9 +94,12 @@ app.post("/ask", async (req, res) => {
   if (category && !CATEGORIES.includes(category)) {
     return res.status(400).json({ error: `category must be one of: ${CATEGORIES.join(", ")}` });
   }
+  if (!LEVELS.includes(level)) {
+    return res.status(400).json({ error: `level must be one of: ${LEVELS.join(", ")}` });
+  }
 
   try {
-    const result = await answerQuestion(question, category, history);
+    const result = await answerQuestion(question, category, history, level);
     res.json(result);
   } catch (err) {
     console.error("Ask failed:", err);

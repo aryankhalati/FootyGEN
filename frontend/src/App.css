@@ -421,3 +421,48 @@
   display: flex;
   flex-direction: column;
 }
+
+/* ---------- Answer style toggle (Beginner / Detailed) ---------- */
+.level-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--pitch-700);
+}
+
+.level-label {
+  color: var(--chalk-dim);
+  font-size: 14px;
+}
+
+.level-toggle {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--pitch-600);
+  border-radius: 999px;
+}
+
+.level-btn {
+  min-height: 34px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--chalk);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.level-btn:hover {
+  background: var(--pitch-700);
+}
+
+.level-active,
+.level-active:hover {
+  background: var(--gold);
+  color: var(--pitch-800);
+}

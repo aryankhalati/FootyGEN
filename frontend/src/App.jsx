@@ -17,6 +17,9 @@ export default function App() {
   // Which screen is showing: "chat" or "compare"
   const [view, setView] = useState("chat");
 
+  // Answer style: "beginner" or "detailed"
+  const [level, setLevel] = useState("beginner");
+
   // Each message: { role: "user" | "assistant", content, sources?, answered?, error? }
   const [messages, setMessages] = useState([]);
   const [question, setQuestion] = useState("");
@@ -91,7 +94,7 @@ export default function App() {
       const res = await fetch(`${API}/ask`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: q, history }),
+        body: JSON.stringify({ question: q, history, level }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Request failed");
@@ -224,6 +227,28 @@ export default function App() {
 
         {/* Chat panel */}
         <section className="chat-panel" aria-label="Chat">
+          <div className="level-bar">
+            <span className="level-label">Answer style</span>
+            <div className="level-toggle" role="group" aria-label="Answer style">
+              <button
+                type="button"
+                className={`level-btn${level === "beginner" ? " level-active" : ""}`}
+                onClick={() => setLevel("beginner")}
+                aria-pressed={level === "beginner"}
+              >
+                Beginner
+              </button>
+              <button
+                type="button"
+                className={`level-btn${level === "detailed" ? " level-active" : ""}`}
+                onClick={() => setLevel("detailed")}
+                aria-pressed={level === "detailed"}
+              >
+                Detailed
+              </button>
+            </div>
+          </div>
+
           <div className="messages">
             {messages.length === 0 && !loading && (
               <div className="empty">
