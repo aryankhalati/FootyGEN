@@ -43,6 +43,19 @@ const askLimiter = rateLimit({
 });
 app.use(["/ask", "/compare"], askLimiter);
 
+// True when Groq says our token budget is used up (HTTP 429 / rate_limit_exceeded)
+function isGroqLimit(err) {
+  return (
+    err?.status === 429 ||
+    err?.error?.error?.code === "rate_limit_exceeded" ||
+    err?.error?.code === "rate_limit_exceeded" ||
+    /rate.?limit/i.test(String(err?.message || ""))
+  );
+}
+
+const LIMIT_MESSAGE =
+  "FootyGEN has hit its daily question limit on the free AI plan. Please try again in a few hours.";
+
 // Health check: tells us the server is alive
 app.get("/health", (req, res) => {
   res.json({ status: "ok", app: "FootyGEN" });
@@ -111,6 +124,9 @@ app.post("/ask", async (req, res) => {
     res.json(result);
   } catch (err) {
     console.error("Ask failed:", err);
+    if (isGroqLimit(err)) {
+      return res.status(503).json({ error: LIMIT_MESSAGE });
+    }
     res.status(500).json({ error: "Something went wrong answering that. Please try again." });
   }
 });
@@ -138,6 +154,9 @@ app.post("/compare", async (req, res) => {
     res.json(result);
   } catch (err) {
     console.error("Compare failed:", err);
+    if (isGroqLimit(err)) {
+      return res.status(503).json({ error: LIMIT_MESSAGE });
+    }
     res.status(500).json({ error: "Something went wrong comparing those. Please try again." });
   }
 });
