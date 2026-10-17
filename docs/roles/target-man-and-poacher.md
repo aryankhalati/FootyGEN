@@ -2,7 +2,7 @@
 title: Target Man and Poacher Roles
 category: roles
 tags: [target man, poacher, striker, centre-forward, No. 9, hold-up play, aerial duels, penalty box, finishing, Ronaldo]
-aliases: [target man, target-man, big man, poacher, fox in the box, penalty-box striker, goal poacher, centre-forward, number 9, no. 9]
+aliases: [target man, target-man, big man, poacher, fox in the box, penalty-box striker, goal poacher, centre-forward, number 9, no. 9, striker]
 ---
 
 # Target Man and Poacher Roles

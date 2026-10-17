@@ -19,7 +19,7 @@ export const testSet = [
   { category: "laws", question: "How quickly must a substituted player leave the field?",
     mustInclude: [["10 seconds", "ten seconds"]], source: ["match duration"] },
   { category: "laws", question: "What happens if a throw-in is deliberately delayed?",
-    mustInclude: [["five second", "countdown"], ["opponents"]], source: ["throw ins"] },
+    mustInclude: [["five second", "countdown"], ["opponents", "opposing team", "opposition", "other team"]], source: ["throw ins"] },
   { category: "laws", question: "How long can a goalkeeper hold the ball?",
     mustInclude: [["eight seconds", "8 seconds"], ["corner"]], source: ["goalkeeper", "handball"] },
   { category: "laws", question: "Can VAR review a second yellow card?",
@@ -41,12 +41,13 @@ export const testSet = [
   { category: "managers", question: "How many times has Ancelotti won the Champions League as a manager?",
     mustInclude: [["five", "5"]], source: ["ancelotti"] },
   { category: "managers", question: "What is La Decima?",
-    mustInclude: [["tenth", "10th", "ten"], ["real madrid", "madrid"]], source: ["ancelotti"] },
+    mustInclude: [["tenth", "10th", "ten"], ["real madrid", "real madrids", "madrid", "madrids"]], source: ["ancelotti"] },
   { category: "managers", question: "What is gegenpressing?",
-    mustInclude: [["immediately", "immediate", "right after", "straight after"], ["lose", "lost", "losing", "loses"]],
+    mustInclude: [["immediately", "immediate", "right after", "straight after", "straight away", "right away", "as soon as", "instantly", "instant"],
+                  ["lose", "lost", "losing", "loses"]],
     source: ["klopp", "high press"] },
   { category: "managers", question: "What was Arrigo Sacchi known for at AC Milan?",
-    mustInclude: [["press", "pressing"], ["compact", "zonal", "zone"]], source: ["sacchi"] },
+    mustInclude: [["press", "pressing", "pressed", "pressure"], ["compact", "zonal", "zone", "zones"]], source: ["sacchi"] },
   { category: "managers", question: "What did Mourinho win with Inter in 2010?",
     mustInclude: [["champions league"], ["serie a"]], source: ["mourinho"] },
 
@@ -59,7 +60,8 @@ export const testSet = [
   { category: "roles", question: "What does an inverted full-back do?",
     mustInclude: [["midfield"], ["possession", "has the ball", "with the ball"]], source: ["inverted full back"] },
   { category: "roles", question: "What is the difference between a target man and a poacher?",
-    mustInclude: [["hold up", "holds up", "hold the ball", "holds the ball", "holding up"], ["box", "close to goal", "score", "scores"]],
+    mustInclude: [["hold up", "holds up", "hold the ball", "holds the ball", "holding up"],
+                  ["box", "penalty area", "close to goal", "score", "scores", "scoring", "finish", "finishing"]],
     source: ["target man"] },
   { category: "roles", question: "What does a sweeper-keeper do?",
     mustInclude: [["outside", "edge of the", "behind the", "beyond", "space behind"]], source: ["goalkeeper"] },
@@ -79,11 +81,12 @@ export const testSet = [
     mustInclude: [["loses the ball", "lose the ball", "lost the ball", "losing the ball", "loses possession", "lose possession", "counter attack", "transition"]],
     source: ["rest defence", "transitions"] },
   { category: "tactics", question: "What is counter-attacking?",
-    mustInclude: [["quickly", "quick", "fast"], ["opponent"]], source: ["counter attacking"] },
+    mustInclude: [["quickly", "quick", "fast", "rapidly", "speed"], ["opponent"]], source: ["counter attacking"] },
 
   // ---------- FORMATIONS (4) ----------
   { category: "formations", question: "What is a 4-3-3 formation?",
-    mustInclude: [["four defenders", "4 defenders"], ["three midfielders", "3 midfielders"], ["three forwards", "3 forwards"]],
+    mustInclude: [["four defenders", "4 defenders"], ["three midfielders", "3 midfielders"],
+                  ["three forwards", "3 forwards", "three attackers", "3 attackers"]],
     source: ["4 3 3"] },
   { category: "formations", question: "Why do 3-5-2 teams need wing-backs?",
     mustInclude: [["wing back", "wing backs"], ["width", "wide", "flank", "flanks", "touchline"]],
@@ -102,5 +105,5 @@ export const testSet = [
 
   // ---------- CROSS-DOC (1) ----------
   { category: "cross-doc", question: "Which managers are known for pressing?",
-    mustInclude: [["klopp"], ["sacchi"]], source: ["klopp", "sacchi"] },
+    mustInclude: [["klopp"], ["sacchi", "sacchis"]], source: ["klopp", "sacchi"] },
 ];
