@@ -10,16 +10,25 @@ const SYSTEM_PROMPT =
   "If you are not sure about something, say so instead of guessing.";
 
 // One function that talks to Groq. The rest of the backend calls this.
-export async function askLLM(userMessage, systemPrompt = SYSTEM_PROMPT) {
+// options.maxTokens lets longer tasks (like Compare) ask for a bigger reply.
+export async function askLLM(
+  userMessage,
+  systemPrompt = SYSTEM_PROMPT,
+  { maxTokens = 1000 } = {}
+) {
   const completion = await groq.chat.completions.create({
     model: process.env.GROQ_MODEL,
     temperature: 0.2, // low = consistent answers
-    max_tokens: 1000, // ceiling on reply length (thinking tokens count too)
+    max_tokens: maxTokens, // ceiling on reply length (thinking tokens count too)
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userMessage },
     ],
   });
 
-  return completion.choices[0].message.content;
+  const choice = completion.choices[0];
+  if (choice.finish_reason === "length") {
+    console.warn(`LLM reply was cut off at ${maxTokens} tokens.`);
+  }
+  return choice.message.content;
 }

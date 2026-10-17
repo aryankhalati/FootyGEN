@@ -303,3 +303,109 @@
     padding: 24px;
   }
 }
+
+/* ---------- Tabs (top bar) ---------- */
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--pitch-600);
+  border-radius: 999px;
+}
+
+.tab {
+  min-height: 36px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--chalk);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.tab:hover {
+  background: var(--pitch-700);
+}
+
+.tab-active,
+.tab-active:hover {
+  background: var(--gold);
+  color: var(--pitch-800);
+}
+
+/* Keeps the tabs centred when the "New chat" button is hidden */
+.topbar-spacer {
+  width: 92px;
+}
+
+/* ---------- Compare view ---------- */
+.compare-view {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.compare-inner {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.compare-status {
+  padding: 16px;
+  text-align: center;
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.compare-side {
+  min-width: 0;
+}
+
+.select {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  font-size: 16px; /* stops iOS zoom on focus */
+  font-weight: 600;
+  color: var(--chalk);
+  background: var(--pitch-900);
+  border: 1px solid var(--pitch-600);
+  border-radius: 10px;
+}
+
+/* Override the single-pitch sizing so two pitches fit side by side */
+.compare-side .pitch {
+  width: 100%;
+  height: auto;
+  max-width: none;
+  min-height: 0;
+}
+
+.compare-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.compare-result {
+  align-self: auto;
+  padding-bottom: 24px;
+}
+
+@media (max-width: 480px) {
+  .topbar-spacer {
+    width: 0;
+  }
+}

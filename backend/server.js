@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import path from "path";
-import { answerQuestion } from "./rag.js";
+import { answerQuestion, compareFormations } from "./rag.js";
 import { CATEGORIES } from "./retriever.js";
 import rateLimit from "express-rate-limit";
 
@@ -30,7 +30,7 @@ app.use(express.json());
 // Behind Render's proxy, trust the first hop so the limiter sees real visitor IPs
 app.set("trust proxy", 1);
 
-// Max 20 questions per minute per visitor on /ask
+// Max 20 LLM requests per minute per visitor, shared by /ask and /compare
 const askLimiter = rateLimit({
   windowMs: 60 * 1000,
   limit: 20,
@@ -38,7 +38,7 @@ const askLimiter = rateLimit({
   legacyHeaders: false,
   message: { error: "Too many questions. Please wait a minute and try again." },
 });
-app.use("/ask", askLimiter);
+app.use(["/ask", "/compare"], askLimiter);
 
 // Health check: tells us the server is alive
 app.get("/health", (req, res) => {
@@ -100,6 +100,33 @@ app.post("/ask", async (req, res) => {
   } catch (err) {
     console.error("Ask failed:", err);
     res.status(500).json({ error: "Something went wrong answering that. Please try again." });
+  }
+});
+
+// Compare two formations: body { a: "4-3-3", b: "4-4-2" }
+app.post("/compare", async (req, res) => {
+  const aId = typeof req.body?.a === "string" ? req.body.a : "";
+  const bId = typeof req.body?.b === "string" ? req.body.b : "";
+
+  if (!aId || !bId) {
+    return res.status(400).json({ error: "Send a JSON body like { \"a\": \"4-3-3\", \"b\": \"4-4-2\" }" });
+  }
+  if (aId === bId) {
+    return res.status(400).json({ error: "Pick two different formations to compare." });
+  }
+
+  const a = formations.find((f) => f.id === aId);
+  const b = formations.find((f) => f.id === bId);
+  if (!a || !b) {
+    return res.status(404).json({ error: "Formation not found." });
+  }
+
+  try {
+    const result = await compareFormations(a, b);
+    res.json(result);
+  } catch (err) {
+    console.error("Compare failed:", err);
+    res.status(500).json({ error: "Something went wrong comparing those. Please try again." });
   }
 });
 

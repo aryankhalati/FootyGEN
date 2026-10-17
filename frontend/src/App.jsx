@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import Pitch from "./Pitch";
+import Compare from "./Compare";
 import "./App.css";
 const API = import.meta.env.VITE_API_URL;
 const HISTORY_LIMIT = 6; // last 6 messages = 3 question/answer pairs
@@ -13,6 +14,9 @@ const EXAMPLES = [
 ];
 
 export default function App() {
+  // Which screen is showing: "chat" or "compare"
+  const [view, setView] = useState("chat");
+
   // Each message: { role: "user" | "assistant", content, sources?, answered?, error? }
   const [messages, setMessages] = useState([]);
   const [question, setQuestion] = useState("");
@@ -125,134 +129,164 @@ export default function App() {
     <div className="app">
       <header className="topbar">
         <h1>FootyGEN</h1>
-        <button className="btn btn-ghost" onClick={newChat}>
-          New chat
-        </button>
+
+        <nav className="tabs" aria-label="Views">
+          <button
+            className={`tab${view === "chat" ? " tab-active" : ""}`}
+            onClick={() => setView("chat")}
+          >
+            Chat
+          </button>
+          <button
+            className={`tab${view === "compare" ? " tab-active" : ""}`}
+            onClick={() => setView("compare")}
+          >
+            Compare
+          </button>
+        </nav>
+
+        {view === "chat" ? (
+          <button className="btn btn-ghost" onClick={newChat}>
+            New chat
+          </button>
+        ) : (
+          <span className="topbar-spacer" aria-hidden="true" />
+        )}
       </header>
 
-      <main className="layout">
-        {/* Pitch panel */}
-        <section className="pitch-panel" aria-label="Formations">
-          {formationsError && <p className="error-text">{formationsError}</p>}
+      {view === "compare" ? (
+        formations.length >= 2 ? (
+          <Compare formations={formations} />
+        ) : (
+          <p className="error-text compare-status">
+            {formationsError || "Loading formations..."}
+          </p>
+        )
+      ) : (
+        <main className="layout">
+          {/* Pitch panel */}
+          <section className="pitch-panel" aria-label="Formations">
+            {formationsError && <p className="error-text">{formationsError}</p>}
 
-          {formations.length > 0 && (
-            <>
-              <div className="chip-row">
-                {formations.map((f) => (
-                  <button
-                    key={f.id}
-                    className={`chip${f.id === selectedId ? " chip-active" : ""}`}
-                    onClick={() => chooseFormation(f.id)}
-                  >
-                    {f.name}
-                  </button>
-                ))}
-              </div>
-
-              {selected && (
-                <>
-                  <Pitch
-                    players={selected.players}
-                    selectedPos={selectedPos}
-                    onSelect={setSelectedPos}
-                  />
-
-                  {roleInfo ? (
-                    <div className="role-card">
-                      <strong>{roleInfo.name}</strong>
-                      <p>{roleInfo.description}</p>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() => ask(roleInfo.question)}
-                        disabled={loading}
-                      >
-                        Ask about this role
-                      </button>
-                    </div>
-                  ) : (
-                    <p className="pitch-hint">
-                      {selected.summary} Tap a player to see their role.
-                    </p>
-                  )}
-                </>
-              )}
-            </>
-          )}
-        </section>
-
-        {/* Chat panel */}
-        <section className="chat-panel" aria-label="Chat">
-          <div className="messages">
-            {messages.length === 0 && !loading && (
-              <div className="empty">
-                <p>Ask anything about tactics, roles, managers or the laws of the game.</p>
+            {formations.length > 0 && (
+              <>
                 <div className="chip-row">
-                  {EXAMPLES.map((ex) => (
-                    <button key={ex} className="chip" onClick={() => ask(ex)}>
-                      {ex}
+                  {formations.map((f) => (
+                    <button
+                      key={f.id}
+                      className={`chip${f.id === selectedId ? " chip-active" : ""}`}
+                      onClick={() => chooseFormation(f.id)}
+                    >
+                      {f.name}
                     </button>
                   ))}
                 </div>
-              </div>
+
+                {selected && (
+                  <>
+                    <Pitch
+                      players={selected.players}
+                      selectedPos={selectedPos}
+                      onSelect={setSelectedPos}
+                    />
+
+                    {roleInfo ? (
+                      <div className="role-card">
+                        <strong>{roleInfo.name}</strong>
+                        <p>{roleInfo.description}</p>
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => ask(roleInfo.question)}
+                          disabled={loading}
+                        >
+                          Ask about this role
+                        </button>
+                      </div>
+                    ) : (
+                      <p className="pitch-hint">
+                        {selected.summary} Tap a player to see their role.
+                      </p>
+                    )}
+                  </>
+                )}
+              </>
             )}
+          </section>
 
-            {messages.map((m, i) => {
-              if (m.role === "user") {
-                return (
-                  <div key={i} className="bubble-user">
-                    {m.content}
+          {/* Chat panel */}
+          <section className="chat-panel" aria-label="Chat">
+            <div className="messages">
+              {messages.length === 0 && !loading && (
+                <div className="empty">
+                  <p>Ask anything about tactics, roles, managers or the laws of the game.</p>
+                  <div className="chip-row">
+                    {EXAMPLES.map((ex) => (
+                      <button key={ex} className="chip" onClick={() => ask(ex)}>
+                        {ex}
+                      </button>
+                    ))}
                   </div>
-                );
-              }
-
-              if (m.error) {
-                return (
-                  <p key={i} className="error-text">
-                    {m.content}
-                  </p>
-                );
-              }
-
-              return (
-                <div key={i} className="answer">
-                  <div className={m.answered ? "answer-body" : "answer-body answer-fallback"}>
-                    <ReactMarkdown>{m.content}</ReactMarkdown>
-                  </div>
-
-                  {m.sources.length > 0 && (
-                    <div className="sources">
-                      <strong>Sources</strong>
-                      <ul>
-                        {m.sources.map((s, j) => (
-                          <li key={j}>
-                            {s.title} · {s.section}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
                 </div>
-              );
-            })}
+              )}
 
-            {loading && <p className="thinking">Thinking...</p>}
-            <div ref={bottomRef} />
-          </div>
+              {messages.map((m, i) => {
+                if (m.role === "user") {
+                  return (
+                    <div key={i} className="bubble-user">
+                      {m.content}
+                    </div>
+                  );
+                }
 
-          <form className="composer" onSubmit={handleSubmit}>
-            <input
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
-              placeholder="Ask about football..."
-              enterKeyHint="send"
-              aria-label="Your question"
-            />
-            <button className="btn btn-primary" type="submit" disabled={loading}>
-              {loading ? "..." : "Ask"}
-            </button>
-          </form>
-        </section>
-      </main>
+                if (m.error) {
+                  return (
+                    <p key={i} className="error-text">
+                      {m.content}
+                    </p>
+                  );
+                }
+
+                return (
+                  <div key={i} className="answer">
+                    <div className={m.answered ? "answer-body" : "answer-body answer-fallback"}>
+                      <ReactMarkdown>{m.content}</ReactMarkdown>
+                    </div>
+
+                    {m.sources.length > 0 && (
+                      <div className="sources">
+                        <strong>Sources</strong>
+                        <ul>
+                          {m.sources.map((s, j) => (
+                            <li key={j}>
+                              {s.title} · {s.section}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+
+              {loading && <p className="thinking">Thinking...</p>}
+              <div ref={bottomRef} />
+            </div>
+
+            <form className="composer" onSubmit={handleSubmit}>
+              <input
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                placeholder="Ask about football..."
+                enterKeyHint="send"
+                aria-label="Your question"
+              />
+              <button className="btn btn-primary" type="submit" disabled={loading}>
+                {loading ? "..." : "Ask"}
+              </button>
+            </form>
+          </section>
+        </main>
+      )}
     </div>
   );
 }
