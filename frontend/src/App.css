@@ -409,3 +409,15 @@
     width: 0;
   }
 }
+
+/* Keep both views mounted; hide the inactive one */
+[hidden] {
+  display: none !important;
+}
+
+.compare-wrap {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}

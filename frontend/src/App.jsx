@@ -132,12 +132,14 @@ export default function App() {
 
         <nav className="tabs" aria-label="Views">
           <button
+            type="button"
             className={`tab${view === "chat" ? " tab-active" : ""}`}
             onClick={() => setView("chat")}
           >
             Chat
           </button>
           <button
+            type="button"
             className={`tab${view === "compare" ? " tab-active" : ""}`}
             onClick={() => setView("compare")}
           >
@@ -146,7 +148,7 @@ export default function App() {
         </nav>
 
         {view === "chat" ? (
-          <button className="btn btn-ghost" onClick={newChat}>
+          <button type="button" className="btn btn-ghost" onClick={newChat}>
             New chat
           </button>
         ) : (
@@ -154,139 +156,150 @@ export default function App() {
         )}
       </header>
 
-      {view === "compare" ? (
-        formations.length >= 2 ? (
+      {/* Compare view: stays mounted, hidden when Chat is active */}
+      {formations.length >= 2 ? (
+        <div hidden={view !== "compare"} className="compare-wrap">
           <Compare formations={formations} />
-        ) : (
+        </div>
+      ) : (
+        view === "compare" && (
           <p className="error-text compare-status">
             {formationsError || "Loading formations..."}
           </p>
         )
-      ) : (
-        <main className="layout">
-          {/* Pitch panel */}
-          <section className="pitch-panel" aria-label="Formations">
-            {formationsError && <p className="error-text">{formationsError}</p>}
+      )}
 
-            {formations.length > 0 && (
-              <>
+      {/* Chat view: stays mounted, hidden when Compare is active */}
+      <main className="layout" hidden={view !== "chat"}>
+        {/* Pitch panel */}
+        <section className="pitch-panel" aria-label="Formations">
+          {formationsError && <p className="error-text">{formationsError}</p>}
+
+          {formations.length > 0 && (
+            <>
+              <div className="chip-row">
+                {formations.map((f) => (
+                  <button
+                    type="button"
+                    key={f.id}
+                    className={`chip${f.id === selectedId ? " chip-active" : ""}`}
+                    onClick={() => chooseFormation(f.id)}
+                  >
+                    {f.name}
+                  </button>
+                ))}
+              </div>
+
+              {selected && (
+                <>
+                  <Pitch
+                    players={selected.players}
+                    selectedPos={selectedPos}
+                    onSelect={setSelectedPos}
+                  />
+
+                  {roleInfo ? (
+                    <div className="role-card">
+                      <strong>{roleInfo.name}</strong>
+                      <p>{roleInfo.description}</p>
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={() => ask(roleInfo.question)}
+                        disabled={loading}
+                      >
+                        Ask about this role
+                      </button>
+                    </div>
+                  ) : (
+                    <p className="pitch-hint">
+                      {selected.summary} Tap a player to see their role.
+                    </p>
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </section>
+
+        {/* Chat panel */}
+        <section className="chat-panel" aria-label="Chat">
+          <div className="messages">
+            {messages.length === 0 && !loading && (
+              <div className="empty">
+                <p>Ask anything about tactics, roles, managers or the laws of the game.</p>
                 <div className="chip-row">
-                  {formations.map((f) => (
+                  {EXAMPLES.map((ex) => (
                     <button
-                      key={f.id}
-                      className={`chip${f.id === selectedId ? " chip-active" : ""}`}
-                      onClick={() => chooseFormation(f.id)}
+                      type="button"
+                      key={ex}
+                      className="chip"
+                      onClick={() => ask(ex)}
                     >
-                      {f.name}
+                      {ex}
                     </button>
                   ))}
                 </div>
-
-                {selected && (
-                  <>
-                    <Pitch
-                      players={selected.players}
-                      selectedPos={selectedPos}
-                      onSelect={setSelectedPos}
-                    />
-
-                    {roleInfo ? (
-                      <div className="role-card">
-                        <strong>{roleInfo.name}</strong>
-                        <p>{roleInfo.description}</p>
-                        <button
-                          className="btn btn-primary"
-                          onClick={() => ask(roleInfo.question)}
-                          disabled={loading}
-                        >
-                          Ask about this role
-                        </button>
-                      </div>
-                    ) : (
-                      <p className="pitch-hint">
-                        {selected.summary} Tap a player to see their role.
-                      </p>
-                    )}
-                  </>
-                )}
-              </>
+              </div>
             )}
-          </section>
 
-          {/* Chat panel */}
-          <section className="chat-panel" aria-label="Chat">
-            <div className="messages">
-              {messages.length === 0 && !loading && (
-                <div className="empty">
-                  <p>Ask anything about tactics, roles, managers or the laws of the game.</p>
-                  <div className="chip-row">
-                    {EXAMPLES.map((ex) => (
-                      <button key={ex} className="chip" onClick={() => ask(ex)}>
-                        {ex}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {messages.map((m, i) => {
-                if (m.role === "user") {
-                  return (
-                    <div key={i} className="bubble-user">
-                      {m.content}
-                    </div>
-                  );
-                }
-
-                if (m.error) {
-                  return (
-                    <p key={i} className="error-text">
-                      {m.content}
-                    </p>
-                  );
-                }
-
+            {messages.map((m, i) => {
+              if (m.role === "user") {
                 return (
-                  <div key={i} className="answer">
-                    <div className={m.answered ? "answer-body" : "answer-body answer-fallback"}>
-                      <ReactMarkdown>{m.content}</ReactMarkdown>
-                    </div>
-
-                    {m.sources.length > 0 && (
-                      <div className="sources">
-                        <strong>Sources</strong>
-                        <ul>
-                          {m.sources.map((s, j) => (
-                            <li key={j}>
-                              {s.title} · {s.section}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+                  <div key={i} className="bubble-user">
+                    {m.content}
                   </div>
                 );
-              })}
+              }
 
-              {loading && <p className="thinking">Thinking...</p>}
-              <div ref={bottomRef} />
-            </div>
+              if (m.error) {
+                return (
+                  <p key={i} className="error-text">
+                    {m.content}
+                  </p>
+                );
+              }
 
-            <form className="composer" onSubmit={handleSubmit}>
-              <input
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-                placeholder="Ask about football..."
-                enterKeyHint="send"
-                aria-label="Your question"
-              />
-              <button className="btn btn-primary" type="submit" disabled={loading}>
-                {loading ? "..." : "Ask"}
-              </button>
-            </form>
-          </section>
-        </main>
-      )}
+              return (
+                <div key={i} className="answer">
+                  <div className={m.answered ? "answer-body" : "answer-body answer-fallback"}>
+                    <ReactMarkdown>{m.content}</ReactMarkdown>
+                  </div>
+
+                  {m.sources.length > 0 && (
+                    <div className="sources">
+                      <strong>Sources</strong>
+                      <ul>
+                        {m.sources.map((s, j) => (
+                          <li key={j}>
+                            {s.title} · {s.section}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+
+            {loading && <p className="thinking">Thinking...</p>}
+            <div ref={bottomRef} />
+          </div>
+
+          <form className="composer" onSubmit={handleSubmit}>
+            <input
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Ask about football..."
+              enterKeyHint="send"
+              aria-label="Your question"
+            />
+            <button className="btn btn-primary" type="submit" disabled={loading}>
+              {loading ? "..." : "Ask"}
+            </button>
+          </form>
+        </section>
+      </main>
     </div>
   );
 }
