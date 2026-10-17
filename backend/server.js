@@ -17,6 +17,9 @@ const formations = JSON.parse(
 const positions = JSON.parse(
   readFileSync(path.join(__dirname, "positions.json"), "utf-8")
 );
+const browse = JSON.parse(
+  readFileSync(path.join(__dirname, "browse.json"), "utf-8")
+);
 
 const app = express();
 const allowedOrigins = [
@@ -62,6 +65,11 @@ app.get("/formations/:id", (req, res) => {
 // All position descriptions, keyed by position code (GK, LB, ST, ...)
 app.get("/positions", (req, res) => {
   res.json(positions);
+});
+
+// Docs grouped by category, for the Browse sidebar
+app.get("/browse", (req, res) => {
+  res.json(browse);
 });
 
 // Keeps only the last 6 valid messages, trimmed in length

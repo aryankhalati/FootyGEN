@@ -13,6 +13,14 @@ const EXAMPLES = [
   "Explain gegenpressing",
 ];
 
+const CATEGORY_LABELS = {
+  formations: "Formations",
+  tactics: "Tactics",
+  roles: "Roles",
+  managers: "Managers",
+  laws: "Laws of the game",
+};
+
 export default function App() {
   // Which screen is showing: "chat" or "compare"
   const [view, setView] = useState("chat");
@@ -34,6 +42,10 @@ export default function App() {
   // Role highlighting
   const [positions, setPositions] = useState({});
   const [selectedPos, setSelectedPos] = useState("");
+
+  // Browse sidebar
+  const [browse, setBrowse] = useState([]);
+  const [browseOpen, setBrowseOpen] = useState(false);
 
   // Only scroll once the chat has started, so the pitch stays in view on first load
   useEffect(() => {
@@ -67,6 +79,19 @@ export default function App() {
       }
     }
     loadPositions();
+  }, []);
+
+  useEffect(() => {
+    async function loadBrowse() {
+      try {
+        const res = await fetch(`${API}/browse`);
+        if (!res.ok) return;
+        setBrowse(await res.json());
+      } catch {
+        // Browse is optional, so fail quietly
+      }
+    }
+    loadBrowse();
   }, []);
 
   const selected = formations.find((f) => f.id === selectedId);
@@ -118,6 +143,13 @@ export default function App() {
     }
   }
 
+  // Clicking a doc in the Browse sidebar: jump to chat and ask about it
+  function askAboutDoc(title) {
+    setBrowseOpen(false);
+    setView("chat");
+    ask(`Explain ${title}`);
+  }
+
   function newChat() {
     setMessages([]);
     setQuestion("");
@@ -148,6 +180,14 @@ export default function App() {
           >
             Compare
           </button>
+          <button
+            type="button"
+            className={`tab${browseOpen ? " tab-active" : ""}`}
+            onClick={() => setBrowseOpen((o) => !o)}
+            aria-expanded={browseOpen}
+          >
+            Browse
+          </button>
         </nav>
 
         {view === "chat" ? (
@@ -158,6 +198,47 @@ export default function App() {
           <span className="topbar-spacer" aria-hidden="true" />
         )}
       </header>
+
+      {/* Browse sidebar */}
+      {browseOpen && (
+        <>
+          <div className="browse-overlay" onClick={() => setBrowseOpen(false)} />
+          <aside className="browse-drawer" aria-label="Browse topics">
+            <div className="browse-head">
+              <strong>Browse topics</strong>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => setBrowseOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+
+            {browse.length === 0 && <p className="pitch-hint">Loading topics...</p>}
+
+            {browse.map((group) => (
+              <div key={group.category} className="browse-group">
+                <h3>{CATEGORY_LABELS[group.category] || group.category}</h3>
+                <ul>
+                  {group.docs.map((d) => (
+                    <li key={d.title}>
+                      <button
+                        type="button"
+                        className="browse-item"
+                        onClick={() => askAboutDoc(d.title)}
+                        disabled={loading}
+                      >
+                        {d.title}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </aside>
+        </>
+      )}
 
       {/* Compare view: stays mounted, hidden when Chat is active */}
       {formations.length >= 2 ? (

@@ -1,0 +1,144 @@
+[
+  {
+    "category": "formations",
+    "docs": [
+      {
+        "title": "3-5-2 Formation"
+      },
+      {
+        "title": "4-1-4-1 Formation"
+      },
+      {
+        "title": "4-2-3-1 Formation"
+      },
+      {
+        "title": "4-3-3 Formation"
+      },
+      {
+        "title": "4-4-2 Formation"
+      }
+    ]
+  },
+  {
+    "category": "tactics",
+    "docs": [
+      {
+        "title": "Attacking and Defending Set Pieces"
+      },
+      {
+        "title": "Building from the Back"
+      },
+      {
+        "title": "Counter-Attacking"
+      },
+      {
+        "title": "Half-Spaces and Overloads"
+      },
+      {
+        "title": "High Defensive Line and the Offside Trap"
+      },
+      {
+        "title": "High Press and Counter-Pressing"
+      },
+      {
+        "title": "Low Block Defending"
+      },
+      {
+        "title": "Man-Marking and Zonal Marking"
+      },
+      {
+        "title": "Possession Football and Tiki-Taka"
+      },
+      {
+        "title": "Transitions and Rest Defence"
+      }
+    ]
+  },
+  {
+    "category": "roles",
+    "docs": [
+      {
+        "title": "Central Midfielder (No. 8) and Box-to-Box Role"
+      },
+      {
+        "title": "Centre-Back Duties, Ball-Playing vs Stopper"
+      },
+      {
+        "title": "False 9 Role"
+      },
+      {
+        "title": "Full-Back Role and Variations"
+      },
+      {
+        "title": "Goalkeeper and the Sweeper-Keeper"
+      },
+      {
+        "title": "Holding Midfielder (No. 6) Role"
+      },
+      {
+        "title": "Inverted Full-Back Role"
+      },
+      {
+        "title": "Playmaker Between the Lines (No. 10) Role"
+      },
+      {
+        "title": "Target Man and Poacher Roles"
+      },
+      {
+        "title": "Wing-Back Role"
+      },
+      {
+        "title": "Winger and Inverted Winger Roles"
+      }
+    ]
+  },
+  {
+    "category": "managers",
+    "docs": [
+      {
+        "title": "Arrigo Sacchi: Pressing and the Compact Line at Milan"
+      },
+      {
+        "title": "Carlo Ancelotti: Man-Management and Tactical Flexibility"
+      },
+      {
+        "title": "José Mourinho: Defensive Organisation and Counter-Attacking"
+      },
+      {
+        "title": "Jürgen Klopp: Gegenpressing Philosophy and Teams"
+      },
+      {
+        "title": "Pep Guardiola: Philosophy and Teams"
+      },
+      {
+        "title": "Sir Alex Ferguson: The Treble Side and the 2007-2009 Team"
+      }
+    ]
+  },
+  {
+    "category": "laws",
+    "docs": [
+      {
+        "title": "Fouls and Cards"
+      },
+      {
+        "title": "Handball Rules"
+      },
+      {
+        "title": "Match Duration, Extra Time, Shootouts and Substitutions"
+      },
+      {
+        "title": "Offside Rule"
+      },
+      {
+        "title": "Penalty Kicks and Free Kick Rules"
+      },
+      {
+        "title": "Throw-ins, Goal Kicks and Corners"
+      },
+      {
+        "title": "What VAR Can and Cannot Review"
+      }
+    ]
+  }
+]
